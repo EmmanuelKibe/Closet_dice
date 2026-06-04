@@ -94,3 +94,11 @@ class WeeklySchedule(models.Model):
 
     def __str__(self):
         return f"Week of {self.week_start_date} for {self.user.username}"
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    city = models.CharField(max_length=100, default='Nairobi', help_text="City name for accurate weather forecasts")
+    receive_evening_alerts = models.BooleanField(default=True, help_text="Toggle to receive tomorrow's outfit email at 8:00 PM")
+    
+    def __str__(self):
+        return f"Profile for {self.user.username}"
