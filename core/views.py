@@ -3,15 +3,27 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from .forms import ClothingItemForm
-from .models import UserProfile, ClothingItem
+from .models import UserProfile, ClothingItem, WeeklySchedule
+from datetime import date, timedelta
 
 @login_required
-def dashboard(name_or_request, *args, **kwargs):
-    # This ensures it works whether called normally or with arguments
-    request = name_or_request if not isinstance(name_or_request, str) else args[0]
-    # The @login_required decorator ensures that if a user is NOT logged in,
-    # they are automatically redirected to the login page.
-    return render(request, 'core/dashboard.html')
+def dashboard(request):
+    # 1. Calculate the calendar date of the current week's Monday
+    today = date.today()
+    monday_start = today - timedelta(days=today.weekday())
+    
+    # 2. Grab the existing schedule or create a fresh blank one for this user
+    schedule, created = WeeklySchedule.objects.get_or_create(
+        user=request.user,
+        week_start_date=monday_start
+    )
+    
+    context = {
+        'schedule': schedule,
+        'week_start': monday_start,
+        'week_end': monday_start + timedelta(days=4)  # Friday's date boundary
+    }
+    return render(request, 'core/dashboard.html', context)
 
 def register(request):
     if request.method == 'POST':
