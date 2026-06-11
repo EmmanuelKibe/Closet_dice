@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
-from .models import UserProfile
+from .forms import ClothingItemForm
+from .models import UserProfile, ClothingItem
 
 @login_required
 def dashboard(name_or_request, *args, **kwargs):
@@ -31,3 +32,27 @@ def register(request):
         form = UserCreationForm()
         
     return render(request, 'registration/register.html', {'form': form})
+
+@login_required
+def upload_clothing(request):
+    # Detect if the device is a mobile phone using HTTP headers
+    user_agent = request.META.get('HTTP_USER_AGENT', '').lower()
+    is_mobile = any(device in user_agent for device in ['iphone', 'android', 'blackberry', 'mobile'])
+
+    if request.method == 'POST':
+        form = ClothingItemForm(request.POST)
+        if form.is_valid():
+            # Create the item but don't save to the database just yet
+            clothing_item = form.save(commit=False)
+            # Tie the clothing item explicitly to the active logged-in user
+            clothing_item.user = request.user
+            clothing_item.save()
+            return redirect('dashboard')
+    else:
+        form = ClothingItemForm()
+
+    context = {
+        'form': form,
+        'is_mobile': is_mobile
+    }
+    return render(request, 'core/upload_clothing.html', context)
