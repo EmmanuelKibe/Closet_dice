@@ -6,19 +6,158 @@
     <title>ClosetDice - Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
-<body class="bg-gray-50 h-screen flex flex-col items-center justify-center">
+<body class="bg-gray-50 min-h-screen text-gray-900">
 
-    <div class="text-center space-y-4 p-6 bg-white rounded-2xl shadow-sm border border-gray-100 max-w-md">
-        <h1 class="text-2xl font-bold text-gray-900">🎉 Welcome to your ClosetDice Dashboard, {{ user.username }}!</h1>
-        <p class="text-gray-500 text-sm">Your database models are linked, your authentication is locked down, and you are successfully logged in.</p>
+    <nav class="bg-white border-b border-gray-100 px-6 py-4 flex justify-between items-center">
+        <div class="flex items-center space-x-2">
+            <span class="text-xl">🎲</span>
+            <span class="font-bold text-lg tracking-tight">ClosetDice</span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <span class="text-xs font-medium text-gray-500">Logged in as: <strong class="text-black">{{ user.username }}</strong></span>
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="text-xs bg-red-50 text-red-600 px-3 py-1.5 rounded-lg font-medium hover:bg-red-100 transition cursor-pointer">
+                    Log Out
+                </button>
+            </form>
+        </div>
+    </nav>
+
+    <main class="max-w-6xl mx-auto px-4 py-8">
         
-        <form action="{% url 'logout' %}" method="post" class="pt-2">
-            {% csrf_token %}
-            <button type="submit" class="bg-red-50 text-red-600 px-4 py-2 rounded-xl text-sm font-medium hover:bg-red-100 transition cursor-pointer">
-                Log Out
-            </button>
-        </form>
-    </div>
+        <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+            <div>
+                <h1 class="text-2xl font-extrabold tracking-tight">Your Weekly Schedule</h1>
+                <p class="text-xs text-gray-500 mt-1">
+                    Week of {{ week_start|date:"M d, Y" }} – {{ week_end|date:"M d, Y" }}
+                </p>
+            </div>
+            
+            <div class="flex space-x-3 w-full md:w-auto">
+                <a href="{% url 'upload_clothing' %}" class="flex-1 md:flex-initial text-center bg-white border border-gray-200 text-black px-4 py-2.5 rounded-xl text-xs font-semibold hover:bg-gray-50 transition shadow-xs">
+                    ＋ Add New Clothing
+                </a>
+                <button class="flex-1 md:flex-initial bg-black text-white px-5 py-2.5 rounded-xl text-xs font-semibold hover:bg-gray-900 transition shadow-xs cursor-pointer">
+                    🎲 Roll Weekly Wardrobe
+                </button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+            
+            <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-xs flex flex-col justify-between min-h-[320px]">
+                <div>
+                    <div class="flex justify-between items-start border-b border-gray-50 pb-3 mb-3">
+                        <h3 class="font-bold text-sm text-gray-900">Monday</h3>
+                        <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Day 1</span>
+                    </div>
+                    <div class="text-[11px] text-blue-600 bg-blue-50 px-2 py-1 rounded-md inline-block font-medium mb-4">
+                        🌤️ {{ schedule.monday_weather }}
+                    </div>
+                    <div class="space-y-2.5">
+                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Top</span> <span class="font-medium">{% if schedule.monday_top %}{{ schedule.monday_top.name }}{% else %}—{% endif %}</span></div>
+                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Bottom</span> <span class="font-medium">{% if schedule.monday_bottom %}{{ schedule.monday_bottom.name }}{% else %}—{% endif %}</span></div>
+                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Footwear</span> <span class="font-medium">{% if schedule.monday_shoes %}{{ schedule.monday_shoes.name }}{% else %}—{% endif %}</span></div>
+                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Outerwear</span> <span class="font-medium">{% if schedule.monday_outerwear %}{{ schedule.monday_outerwear.name }}{% else %}—{% endif %}</span></div>
+                    </div>
+                </div>
+                <div class="mt-6 pt-3 border-t border-gray-50 flex items-center justify-between text-xs">
+                    <span class="text-gray-400">Confirmed:</span>
+                    <span class="font-semibold text-gray-500">{% if schedule.monday_confirmed %}✅{% else %}❌{% endif %}</span>
+                </div>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-xs flex flex-col justify-between min-h-[320px]">
+                <div>
+                    <div class="flex justify-between items-start border-b border-gray-50 pb-3 mb-3">
+                        <h3 class="font-bold text-sm text-gray-900">Tuesday</h3>
+                        <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Day 2</span>
+                    </div>
+                    <div class="text-[11px] text-blue-600 bg-blue-50 px-2 py-1 rounded-md inline-block font-medium mb-4">
+                        🌤️ {{ schedule.tuesday_weather }}
+                    </div>
+                    <div class="space-y-2.5">
+                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Top</span> <span class="font-medium">{% if schedule.tuesday_top %}{{ schedule.tuesday_top.name }}{% else %}—{% endif %}</span></div>
+                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Bottom</span> <span class="font-medium">{% if schedule.tuesday_bottom %}{{ schedule.tuesday_bottom.name }}{% else %}—{% endif %}</span></div>
+                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Footwear</span> <span class="font-medium">{% if schedule.tuesday_shoes %}{{ schedule.tuesday_shoes.name }}{% else %}—{% endif %}</span></div>
+                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Outerwear</span> <span class="font-medium">{% if schedule.tuesday_outerwear %}{{ schedule.tuesday_outerwear.name }}{% else %}—{% endif %}</span></div>
+                    </div>
+                </div>
+                <div class="mt-6 pt-3 border-t border-gray-50 flex items-center justify-between text-xs">
+                    <span class="text-gray-400">Confirmed:</span>
+                    <span class="font-semibold text-gray-500">{% if schedule.tuesday_confirmed %}✅{% else %}❌{% endif %}</span>
+                </div>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-xs flex flex-col justify-between min-h-[320px]">
+                <div>
+                    <div class="flex justify-between items-start border-b border-gray-50 pb-3 mb-3">
+                        <h3 class="font-bold text-sm text-gray-900">Wednesday</h3>
+                        <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Day 3</span>
+                    </div>
+                    <div class="text-[11px] text-blue-600 bg-blue-50 px-2 py-1 rounded-md inline-block font-medium mb-4">
+                        🌤️ {{ schedule.wednesday_weather }}
+                    </div>
+                    <div class="space-y-2.5">
+                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Top</span> <span class="font-medium">{% if schedule.wednesday_top %}{{ schedule.wednesday_top.name }}{% else %}—{% endif %}</span></div>
+                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Bottom</span> <span class="font-medium">{% if schedule.wednesday_bottom %}{{ schedule.wednesday_bottom.name }}{% else %}—{% endif %}</span></div>
+                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Footwear</span> <span class="font-medium">{% if schedule.wednesday_shoes %}{{ schedule.wednesday_shoes.name }}{% else %}—{% endif %}</span></div>
+                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Outerwear</span> <span class="font-medium">{% if schedule.wednesday_outerwear %}{{ schedule.wednesday_outerwear.name }}{% else %}—{% endif %}</span></div>
+                    </div>
+                </div>
+                <div class="mt-6 pt-3 border-t border-gray-50 flex items-center justify-between text-xs">
+                    <span class="text-gray-400">Confirmed:</span>
+                    <span class="font-semibold text-gray-500">{% if schedule.wednesday_confirmed %}✅{% else %}❌{% endif %}</span>
+                </div>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-xs flex flex-col justify-between min-h-[320px]">
+                <div>
+                    <div class="flex justify-between items-start border-b border-gray-50 pb-3 mb-3">
+                        <h3 class="font-bold text-sm text-gray-900">Thursday</h3>
+                        <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Day 4</span>
+                    </div>
+                    <div class="text-[11px] text-blue-600 bg-blue-50 px-2 py-1 rounded-md inline-block font-medium mb-4">
+                        🌤️ {{ schedule.thursday_weather }}
+                    </div>
+                    <div class="space-y-2.5">
+                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Top</span> <span class="font-medium">{% if schedule.thursday_top %}{{ schedule.thursday_top.name }}{% else %}—{% endif %}</span></div>
+                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Bottom</span> <span class="font-medium">{% if schedule.thursday_bottom %}{{ schedule.thursday_bottom.name }}{% else %}—{% endif %}</span></div>
+                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Footwear</span> <span class="font-medium">{% if schedule.thursday_shoes %}{{ schedule.thursday_shoes.name }}{% else %}—{% endif %}</span></div>
+                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Outerwear</span> <span class="font-medium">{% if schedule.thursday_outerwear %}{{ schedule.thursday_outerwear.name }}{% else %}—{% endif %}</span></div>
+                    </div>
+                </div>
+                <div class="mt-6 pt-3 border-t border-gray-50 flex items-center justify-between text-xs">
+                    <span class="text-gray-400">Confirmed:</span>
+                    <span class="font-semibold text-gray-500">{% if schedule.thursday_confirmed %}✅{% else %}❌{% endif %}</span>
+                </div>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-xs flex flex-col justify-between min-h-[320px]">
+                <div>
+                    <div class="flex justify-between items-start border-b border-gray-50 pb-3 mb-3">
+                        <h3 class="font-bold text-sm text-gray-900">Friday</h3>
+                        <span class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">Day 5</span>
+                    </div>
+                    <div class="text-[11px] text-blue-600 bg-blue-50 px-2 py-1 rounded-md inline-block font-medium mb-4">
+                        🌤️ {{ schedule.friday_weather }}
+                    </div>
+                    <div class="space-y-2.5">
+                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Top</span> <span class="font-medium">{% if schedule.friday_top %}{{ schedule.friday_top.name }}{% else %}—{% endif %}</span></div>
+                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Bottom</span> <span class="font-medium">{% if schedule.friday_bottom %}{{ schedule.friday_bottom.name }}{% else %}—{% endif %}</span></div>
+                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Footwear</span> <span class="font-medium">{% if schedule.friday_shoes %}{{ schedule.friday_shoes.name }}{% else %}—{% endif %}</span></div>
+                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Outerwear</span> <span class="font-medium">{% if schedule.friday_outerwear %}{{ schedule.friday_outerwear.name }}{% else %}—{% endif %}</span></div>
+                    </div>
+                </div>
+                <div class="mt-6 pt-3 border-t border-gray-50 flex items-center justify-between text-xs">
+                    <span class="text-gray-400">Confirmed:</span>
+                    <span class="font-semibold text-gray-500">{% if schedule.friday_confirmed %}✅{% else %}❌{% endif %}</span>
+                </div>
+            </div>
+
+        </div>
+    </main>
 
 </body>
 </html>
