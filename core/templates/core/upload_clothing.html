@@ -15,7 +15,7 @@
             <p class="text-xs text-gray-500">Categorize your items to optimize the dice rolling system.</p>
         </div>
 
-        <form method="post" class="space-y-4">
+        <form method="post" enctype="multipart/form-data" class="space-y-4">
             {% csrf_token %}
 
             <div>
@@ -42,7 +42,12 @@
                     <label for="{{ field.id_for_label }}" class="block text-xs font-semibold text-gray-600 uppercase tracking-wider mb-1">
                         {{ field.label }}
                     </label>
+                    
                     {{ field }}
+                    
+                    {% if field.errors %}
+                        <p class="text-xs text-red-500 mt-1 font-medium">{{ field.errors.as_text }}</p>
+                    {% endif %}
                 </div>
             {% endfor %}
 

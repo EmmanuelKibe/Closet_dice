@@ -5,7 +5,7 @@ class ClothingItemForm(forms.ModelForm):
     class Meta:
         model = ClothingItem
         # We let users specify everything except the owner user profile and the image URL
-        fields = ['name', 'category', 'color_category', 'formality_level', 'weather_suitability']
+        fields = ['name', 'category', 'color_category', 'formality_level', 'weather_suitability', 'image']
         
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

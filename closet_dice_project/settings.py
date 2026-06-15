@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -36,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'cloudinary_storage',
     'django.contrib.staticfiles',
+    'cloudinary',
     'core',
 ]
 
@@ -116,9 +119,28 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+# Media files configuration
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.path_join(BASE_DIR, 'media') if hasattr(os.path, 'path_join') else os.path.join(BASE_DIR, 'media')
 
 # Where to redirect users after a successful login
 LOGIN_REDIRECT_URL = '/'
 
 # Where to redirect users after logging out
 LOGOUT_REDIRECT_URL = '/accounts/login/'
+
+# Cloudinary Configuration Secrets
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'duf6cic6c',
+    'API_KEY': '176344838726928',
+    'API_SECRET': 'MOw-fkN3dLyqzX-G4nHop5QtCqo',
+}
+
+STORAGES = {
+    "default": {
+        "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}

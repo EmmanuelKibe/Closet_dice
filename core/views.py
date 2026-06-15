@@ -52,7 +52,7 @@ def upload_clothing(request):
     is_mobile = any(device in user_agent for device in ['iphone', 'android', 'blackberry', 'mobile'])
 
     if request.method == 'POST':
-        form = ClothingItemForm(request.POST)
+        form = ClothingItemForm(request.POST, request.FILES)
         if form.is_valid():
             # Create the item but don't save to the database just yet
             clothing_item = form.save(commit=False)
@@ -68,3 +68,4 @@ def upload_clothing(request):
         'is_mobile': is_mobile
     }
     return render(request, 'core/upload_clothing.html', context)
+    

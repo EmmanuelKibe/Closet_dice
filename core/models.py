@@ -38,7 +38,7 @@ class ClothingItem(models.Model):
     weather_suitability = models.CharField(max_length=15, choices=WEATHER_CHOICES, default='ALL')
     in_laundry = models.BooleanField(default=False)
     last_worn = models.DateField(null=True, blank=True)
-    image_url = models.URLField(max_length=500, blank=True, null=True)
+    image = models.ImageField(upload_to='closet_items/', blank=True, null=True)
 
     def __str__(self):
         return f"{self.name} ({self.get_category_display()})"
