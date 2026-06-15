@@ -46,7 +46,7 @@
 
         <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
             
-            <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-xs flex flex-col justify-between min-h-[320px]">
+            <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-xs flex flex-col justify-between min-h-[360px]">
                 <div>
                     <div class="flex justify-between items-start border-b border-gray-50 pb-3 mb-3">
                         <h3 class="font-bold text-sm text-gray-900">Monday</h3>
@@ -55,11 +55,44 @@
                     <div class="text-[11px] text-blue-600 bg-blue-50 px-2 py-1 rounded-md inline-block font-medium mb-4">
                         🌤️ {{ schedule.monday_weather }}
                     </div>
-                    <div class="space-y-2.5">
-                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Top</span> <span class="font-medium">{% if schedule.monday_top %}{{ schedule.monday_top.name }}{% else %}—{% endif %}</span></div>
-                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Bottom</span> <span class="font-medium">{% if schedule.monday_bottom %}{{ schedule.monday_bottom.name }}{% else %}—{% endif %}</span></div>
-                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Footwear</span> <span class="font-medium">{% if schedule.monday_shoes %}{{ schedule.monday_shoes.name }}{% else %}—{% endif %}</span></div>
-                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Outerwear</span> <span class="font-medium">{% if schedule.monday_outerwear %}{{ schedule.monday_outerwear.name }}{% else %}—{% endif %}</span></div>
+                    
+                    <div class="space-y-3">
+                        <div class="text-xs flex items-center space-x-3">
+                            {% if schedule.monday_top and schedule.monday_top.image %}
+                                <img src="{{ schedule.monday_top.image.url }}" class="w-8 h-8 rounded-lg object-cover border border-gray-100 shadow-xs">
+                            {% endif %}
+                            <div>
+                                <span class="text-gray-400 text-[9px] block uppercase font-semibold tracking-wider">Top</span> 
+                                <span class="font-medium">{% if schedule.monday_top %}{{ schedule.monday_top.name }}{% else %}—{% endif %}</span>
+                            </div>
+                        </div>
+                        <div class="text-xs flex items-center space-x-3">
+                            {% if schedule.monday_bottom and schedule.monday_bottom.image %}
+                                <img src="{{ schedule.monday_bottom.image.url }}" class="w-8 h-8 rounded-lg object-cover border border-gray-100 shadow-xs">
+                            {% endif %}
+                            <div>
+                                <span class="text-gray-400 text-[9px] block uppercase font-semibold tracking-wider">Bottom</span> 
+                                <span class="font-medium">{% if schedule.monday_bottom %}{{ schedule.monday_bottom.name }}{% else %}—{% endif %}</span>
+                            </div>
+                        </div>
+                        <div class="text-xs flex items-center space-x-3">
+                            {% if schedule.monday_shoes and schedule.monday_shoes.image %}
+                                <img src="{{ schedule.monday_shoes.image.url }}" class="w-8 h-8 rounded-lg object-cover border border-gray-100 shadow-xs">
+                            {% endif %}
+                            <div>
+                                <span class="text-gray-400 text-[9px] block uppercase font-semibold tracking-wider">Footwear</span> 
+                                <span class="font-medium">{% if schedule.monday_shoes %}{{ schedule.monday_shoes.name }}{% else %}—{% endif %}</span>
+                            </div>
+                        </div>
+                        <div class="text-xs flex items-center space-x-3">
+                            {% if schedule.monday_outerwear and schedule.monday_outerwear.image %}
+                                <img src="{{ schedule.monday_outerwear.image.url }}" class="w-8 h-8 rounded-lg object-cover border border-gray-100 shadow-xs">
+                            {% endif %}
+                            <div>
+                                <span class="text-gray-400 text-[9px] block uppercase font-semibold tracking-wider">Outerwear</span> 
+                                <span class="font-medium">{% if schedule.monday_outerwear %}{{ schedule.monday_outerwear.name }}{% else %}—{% endif %}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="mt-6 pt-3 border-t border-gray-50 flex items-center justify-between text-xs">
@@ -68,7 +101,7 @@
                 </div>
             </div>
 
-            <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-xs flex flex-col justify-between min-h-[320px]">
+            <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-xs flex flex-col justify-between min-h-[360px]">
                 <div>
                     <div class="flex justify-between items-start border-b border-gray-50 pb-3 mb-3">
                         <h3 class="font-bold text-sm text-gray-900">Tuesday</h3>
@@ -77,11 +110,44 @@
                     <div class="text-[11px] text-blue-600 bg-blue-50 px-2 py-1 rounded-md inline-block font-medium mb-4">
                         🌤️ {{ schedule.tuesday_weather }}
                     </div>
-                    <div class="space-y-2.5">
-                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Top</span> <span class="font-medium">{% if schedule.tuesday_top %}{{ schedule.tuesday_top.name }}{% else %}—{% endif %}</span></div>
-                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Bottom</span> <span class="font-medium">{% if schedule.tuesday_bottom %}{{ schedule.tuesday_bottom.name }}{% else %}—{% endif %}</span></div>
-                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Footwear</span> <span class="font-medium">{% if schedule.tuesday_shoes %}{{ schedule.tuesday_shoes.name }}{% else %}—{% endif %}</span></div>
-                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Outerwear</span> <span class="font-medium">{% if schedule.tuesday_outerwear %}{{ schedule.tuesday_outerwear.name }}{% else %}—{% endif %}</span></div>
+                    
+                    <div class="space-y-3">
+                        <div class="text-xs flex items-center space-x-3">
+                            {% if schedule.tuesday_top and schedule.tuesday_top.image %}
+                                <img src="{{ schedule.tuesday_top.image.url }}" class="w-8 h-8 rounded-lg object-cover border border-gray-100 shadow-xs">
+                            {% endif %}
+                            <div>
+                                <span class="text-gray-400 text-[9px] block uppercase font-semibold tracking-wider">Top</span> 
+                                <span class="font-medium">{% if schedule.tuesday_top %}{{ schedule.tuesday_top.name }}{% else %}—{% endif %}</span>
+                            </div>
+                        </div>
+                        <div class="text-xs flex items-center space-x-3">
+                            {% if schedule.tuesday_bottom and schedule.tuesday_bottom.image %}
+                                <img src="{{ schedule.tuesday_bottom.image.url }}" class="w-8 h-8 rounded-lg object-cover border border-gray-100 shadow-xs">
+                            {% endif %}
+                            <div>
+                                <span class="text-gray-400 text-[9px] block uppercase font-semibold tracking-wider">Bottom</span> 
+                                <span class="font-medium">{% if schedule.tuesday_bottom %}{{ schedule.tuesday_bottom.name }}{% else %}—{% endif %}</span>
+                            </div>
+                        </div>
+                        <div class="text-xs flex items-center space-x-3">
+                            {% if schedule.tuesday_shoes and schedule.tuesday_shoes.image %}
+                                <img src="{{ schedule.tuesday_shoes.image.url }}" class="w-8 h-8 rounded-lg object-cover border border-gray-100 shadow-xs">
+                            {% endif %}
+                            <div>
+                                <span class="text-gray-400 text-[9px] block uppercase font-semibold tracking-wider">Footwear</span> 
+                                <span class="font-medium">{% if schedule.tuesday_shoes %}{{ schedule.tuesday_shoes.name }}{% else %}—{% endif %}</span>
+                            </div>
+                        </div>
+                        <div class="text-xs flex items-center space-x-3">
+                            {% if schedule.tuesday_outerwear and schedule.tuesday_outerwear.image %}
+                                <img src="{{ schedule.tuesday_outerwear.image.url }}" class="w-8 h-8 rounded-lg object-cover border border-gray-100 shadow-xs">
+                            {% endif %}
+                            <div>
+                                <span class="text-gray-400 text-[9px] block uppercase font-semibold tracking-wider">Outerwear</span> 
+                                <span class="font-medium">{% if schedule.tuesday_outerwear %}{{ schedule.tuesday_outerwear.name }}{% else %}—{% endif %}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="mt-6 pt-3 border-t border-gray-50 flex items-center justify-between text-xs">
@@ -90,7 +156,7 @@
                 </div>
             </div>
 
-            <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-xs flex flex-col justify-between min-h-[320px]">
+            <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-xs flex flex-col justify-between min-h-[360px]">
                 <div>
                     <div class="flex justify-between items-start border-b border-gray-50 pb-3 mb-3">
                         <h3 class="font-bold text-sm text-gray-900">Wednesday</h3>
@@ -99,11 +165,44 @@
                     <div class="text-[11px] text-blue-600 bg-blue-50 px-2 py-1 rounded-md inline-block font-medium mb-4">
                         🌤️ {{ schedule.wednesday_weather }}
                     </div>
-                    <div class="space-y-2.5">
-                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Top</span> <span class="font-medium">{% if schedule.wednesday_top %}{{ schedule.wednesday_top.name }}{% else %}—{% endif %}</span></div>
-                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Bottom</span> <span class="font-medium">{% if schedule.wednesday_bottom %}{{ schedule.wednesday_bottom.name }}{% else %}—{% endif %}</span></div>
-                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Footwear</span> <span class="font-medium">{% if schedule.wednesday_shoes %}{{ schedule.wednesday_shoes.name }}{% else %}—{% endif %}</span></div>
-                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Outerwear</span> <span class="font-medium">{% if schedule.wednesday_outerwear %}{{ schedule.wednesday_outerwear.name }}{% else %}—{% endif %}</span></div>
+                    
+                    <div class="space-y-3">
+                        <div class="text-xs flex items-center space-x-3">
+                            {% if schedule.wednesday_top and schedule.wednesday_top.image %}
+                                <img src="{{ schedule.wednesday_top.image.url }}" class="w-8 h-8 rounded-lg object-cover border border-gray-100 shadow-xs">
+                            {% endif %}
+                            <div>
+                                <span class="text-gray-400 text-[9px] block uppercase font-semibold tracking-wider">Top</span> 
+                                <span class="font-medium">{% if schedule.wednesday_top %}{{ schedule.wednesday_top.name }}{% else %}—{% endif %}</span>
+                            </div>
+                        </div>
+                        <div class="text-xs flex items-center space-x-3">
+                            {% if schedule.wednesday_bottom and schedule.wednesday_bottom.image %}
+                                <img src="{{ schedule.wednesday_bottom.image.url }}" class="w-8 h-8 rounded-lg object-cover border border-gray-100 shadow-xs">
+                            {% endif %}
+                            <div>
+                                <span class="text-gray-400 text-[9px] block uppercase font-semibold tracking-wider">Bottom</span> 
+                                <span class="font-medium">{% if schedule.wednesday_bottom %}{{ schedule.wednesday_bottom.name }}{% else %}—{% endif %}</span>
+                            </div>
+                        </div>
+                        <div class="text-xs flex items-center space-x-3">
+                            {% if schedule.wednesday_shoes and schedule.wednesday_shoes.image %}
+                                <img src="{{ schedule.wednesday_shoes.image.url }}" class="w-8 h-8 rounded-lg object-cover border border-gray-100 shadow-xs">
+                            {% endif %}
+                            <div>
+                                <span class="text-gray-400 text-[9px] block uppercase font-semibold tracking-wider">Footwear</span> 
+                                <span class="font-medium">{% if schedule.wednesday_shoes %}{{ schedule.wednesday_shoes.name }}{% else %}—{% endif %}</span>
+                            </div>
+                        </div>
+                        <div class="text-xs flex items-center space-x-3">
+                            {% if schedule.wednesday_outerwear and schedule.wednesday_outerwear.image %}
+                                <img src="{{ schedule.wednesday_outerwear.image.url }}" class="w-8 h-8 rounded-lg object-cover border border-gray-100 shadow-xs">
+                            {% endif %}
+                            <div>
+                                <span class="text-gray-400 text-[9px] block uppercase font-semibold tracking-wider">Outerwear</span> 
+                                <span class="font-medium">{% if schedule.wednesday_outerwear %}{{ schedule.wednesday_outerwear.name }}{% else %}—{% endif %}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="mt-6 pt-3 border-t border-gray-50 flex items-center justify-between text-xs">
@@ -112,7 +211,7 @@
                 </div>
             </div>
 
-            <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-xs flex flex-col justify-between min-h-[320px]">
+            <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-xs flex flex-col justify-between min-h-[360px]">
                 <div>
                     <div class="flex justify-between items-start border-b border-gray-50 pb-3 mb-3">
                         <h3 class="font-bold text-sm text-gray-900">Thursday</h3>
@@ -121,11 +220,44 @@
                     <div class="text-[11px] text-blue-600 bg-blue-50 px-2 py-1 rounded-md inline-block font-medium mb-4">
                         🌤️ {{ schedule.thursday_weather }}
                     </div>
-                    <div class="space-y-2.5">
-                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Top</span> <span class="font-medium">{% if schedule.thursday_top %}{{ schedule.thursday_top.name }}{% else %}—{% endif %}</span></div>
-                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Bottom</span> <span class="font-medium">{% if schedule.thursday_bottom %}{{ schedule.thursday_bottom.name }}{% else %}—{% endif %}</span></div>
-                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Footwear</span> <span class="font-medium">{% if schedule.thursday_shoes %}{{ schedule.thursday_shoes.name }}{% else %}—{% endif %}</span></div>
-                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Outerwear</span> <span class="font-medium">{% if schedule.thursday_outerwear %}{{ schedule.thursday_outerwear.name }}{% else %}—{% endif %}</span></div>
+                    
+                    <div class="space-y-3">
+                        <div class="text-xs flex items-center space-x-3">
+                            {% if schedule.thursday_top and schedule.thursday_top.image %}
+                                <img src="{{ schedule.thursday_top.image.url }}" class="w-8 h-8 rounded-lg object-cover border border-gray-100 shadow-xs">
+                            {% endif %}
+                            <div>
+                                <span class="text-gray-400 text-[9px] block uppercase font-semibold tracking-wider">Top</span> 
+                                <span class="font-medium">{% if schedule.thursday_top %}{{ schedule.thursday_top.name }}{% else %}—{% endif %}</span>
+                            </div>
+                        </div>
+                        <div class="text-xs flex items-center space-x-3">
+                            {% if schedule.thursday_bottom and schedule.thursday_bottom.image %}
+                                <img src="{{ schedule.thursday_bottom.image.url }}" class="w-8 h-8 rounded-lg object-cover border border-gray-100 shadow-xs">
+                            {% endif %}
+                            <div>
+                                <span class="text-gray-400 text-[9px] block uppercase font-semibold tracking-wider">Bottom</span> 
+                                <span class="font-medium">{% if schedule.thursday_bottom %}{{ schedule.thursday_bottom.name }}{% else %}—{% endif %}</span>
+                            </div>
+                        </div>
+                        <div class="text-xs flex items-center space-x-3">
+                            {% if schedule.thursday_shoes and schedule.thursday_shoes.image %}
+                                <img src="{{ schedule.thursday_shoes.image.url }}" class="w-8 h-8 rounded-lg object-cover border border-gray-100 shadow-xs">
+                            {% endif %}
+                            <div>
+                                <span class="text-gray-400 text-[9px] block uppercase font-semibold tracking-wider">Footwear</span> 
+                                <span class="font-medium">{% if schedule.thursday_shoes %}{{ schedule.thursday_shoes.name }}{% else %}—{% endif %}</span>
+                            </div>
+                        </div>
+                        <div class="text-xs flex items-center space-x-3">
+                            {% if schedule.thursday_outerwear and schedule.thursday_outerwear.image %}
+                                <img src="{{ schedule.thursday_outerwear.image.url }}" class="w-8 h-8 rounded-lg object-cover border border-gray-100 shadow-xs">
+                            {% endif %}
+                            <div>
+                                <span class="text-gray-400 text-[9px] block uppercase font-semibold tracking-wider">Outerwear</span> 
+                                <span class="font-medium">{% if schedule.thursday_outerwear %}{{ schedule.thursday_outerwear.name }}{% else %}—{% endif %}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="mt-6 pt-3 border-t border-gray-50 flex items-center justify-between text-xs">
@@ -134,7 +266,7 @@
                 </div>
             </div>
 
-            <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-xs flex flex-col justify-between min-h-[320px]">
+            <div class="bg-white p-5 rounded-2xl border border-gray-100 shadow-xs flex flex-col justify-between min-h-[360px]">
                 <div>
                     <div class="flex justify-between items-start border-b border-gray-50 pb-3 mb-3">
                         <h3 class="font-bold text-sm text-gray-900">Friday</h3>
@@ -143,11 +275,44 @@
                     <div class="text-[11px] text-blue-600 bg-blue-50 px-2 py-1 rounded-md inline-block font-medium mb-4">
                         🌤️ {{ schedule.friday_weather }}
                     </div>
-                    <div class="space-y-2.5">
-                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Top</span> <span class="font-medium">{% if schedule.friday_top %}{{ schedule.friday_top.name }}{% else %}—{% endif %}</span></div>
-                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Bottom</span> <span class="font-medium">{% if schedule.friday_bottom %}{{ schedule.friday_bottom.name }}{% else %}—{% endif %}</span></div>
-                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Footwear</span> <span class="font-medium">{% if schedule.friday_shoes %}{{ schedule.friday_shoes.name }}{% else %}—{% endif %}</span></div>
-                        <div class="text-xs"><span class="text-gray-400 text-[10px] block uppercase font-semibold">Outerwear</span> <span class="font-medium">{% if schedule.friday_outerwear %}{{ schedule.friday_outerwear.name }}{% else %}—{% endif %}</span></div>
+                    
+                    <div class="space-y-3">
+                        <div class="text-xs flex items-center space-x-3">
+                            {% if schedule.friday_top and schedule.friday_top.image %}
+                                <img src="{{ schedule.friday_top.image.url }}" class="w-8 h-8 rounded-lg object-cover border border-gray-100 shadow-xs">
+                            {% endif %}
+                            <div>
+                                <span class="text-gray-400 text-[9px] block uppercase font-semibold tracking-wider">Top</span> 
+                                <span class="font-medium">{% if schedule.friday_top %}{{ schedule.friday_top.name }}{% else %}—{% endif %}</span>
+                            </div>
+                        </div>
+                        <div class="text-xs flex items-center space-x-3">
+                            {% if schedule.friday_bottom and schedule.friday_bottom.image %}
+                                <img src="{{ schedule.friday_bottom.image.url }}" class="w-8 h-8 rounded-lg object-cover border border-gray-100 shadow-xs">
+                            {% endif %}
+                            <div>
+                                <span class="text-gray-400 text-[9px] block uppercase font-semibold tracking-wider">Bottom</span> 
+                                <span class="font-medium">{% if schedule.friday_bottom %}{{ schedule.friday_bottom.name }}{% else %}—{% endif %}</span>
+                            </div>
+                        </div>
+                        <div class="text-xs flex items-center space-x-3">
+                            {% if schedule.friday_shoes and schedule.friday_shoes.image %}
+                                <img src="{{ schedule.friday_shoes.image.url }}" class="w-8 h-8 rounded-lg object-cover border border-gray-100 shadow-xs">
+                            {% endif %}
+                            <div>
+                                <span class="text-gray-400 text-[9px] block uppercase font-semibold tracking-wider">Footwear</span> 
+                                <span class="font-medium">{% if schedule.friday_shoes %}{{ schedule.friday_shoes.name }}{% else %}—{% endif %}</span>
+                            </div>
+                        </div>
+                        <div class="text-xs flex items-center space-x-3">
+                            {% if schedule.friday_outerwear and schedule.friday_outerwear.image %}
+                                <img src="{{ schedule.friday_outerwear.image.url }}" class="w-8 h-8 rounded-lg object-cover border border-gray-100 shadow-xs">
+                            {% endif %}
+                            <div>
+                                <span class="text-gray-400 text-[9px] block uppercase font-semibold tracking-wider">Outerwear</span> 
+                                <span class="font-medium">{% if schedule.friday_outerwear %}{{ schedule.friday_outerwear.name }}{% else %}—{% endif %}</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="mt-6 pt-3 border-t border-gray-50 flex items-center justify-between text-xs">
