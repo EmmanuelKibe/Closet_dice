@@ -144,3 +144,6 @@ STORAGES = {
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
+
+# Visual Crossing Weather Engine Configuration
+VISUAL_CROSSING_API_KEY = '7Y5ZF75VT8MJL24FGTSR8N9ZQ'

@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.conf import settings
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from .forms import ClothingItemForm
+from .weather_service import fetch_weekly_forecast, determine_weather_suitability
 from .models import UserProfile, ClothingItem, WeeklySchedule
 from datetime import date, timedelta
 
@@ -17,6 +19,26 @@ def dashboard(request):
         user=request.user,
         week_start_date=monday_start
     )
+
+    # Check if we need to populate empty weather placeholders
+    if schedule.monday_weather == "Awaiting forecast...":
+        # Get user's city from onboarding profile data (default to Nairobi if empty)
+        user_profile = getattr(request.user, 'userprofile', None)
+        city = user_profile.location if user_profile and user_profile.location else "Nairobi"
+        
+        forecast_days = fetch_weekly_forecast(city, settings.VISUAL_CROSSING_API_KEY)
+        
+        # If the API returned valid data, map the first 5 days to Mon-Fri
+        if forecast_days:
+            try:
+                schedule.monday_weather = determine_weather_suitability(forecast_days[0]['tempmax'])
+                schedule.tuesday_weather = determine_weather_suitability(forecast_days[1]['tempmax'])
+                schedule.wednesday_weather = determine_weather_suitability(forecast_days[2]['tempmax'])
+                schedule.thursday_weather = determine_weather_suitability(forecast_days[3]['tempmax'])
+                schedule.friday_weather = determine_weather_suitability(forecast_days[4]['tempmax'])
+                schedule.save()
+            except (IndexError, KeyError):
+                pass
     
     context = {
         'schedule': schedule,
@@ -68,4 +90,5 @@ def upload_clothing(request):
         'is_mobile': is_mobile
     }
     return render(request, 'core/upload_clothing.html', context)
+    
     
