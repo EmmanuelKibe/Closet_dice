@@ -38,9 +38,12 @@
                 <a href="{% url 'upload_clothing' %}" class="flex-1 md:flex-initial text-center bg-white border border-gray-200 text-black px-4 py-2.5 rounded-xl text-xs font-semibold hover:bg-gray-50 transition shadow-xs">
                     ＋ Add New Clothing
                 </a>
-                <button class="flex-1 md:flex-initial bg-black text-white px-5 py-2.5 rounded-xl text-xs font-semibold hover:bg-gray-900 transition shadow-xs cursor-pointer">
-                    🎲 Roll Weekly Wardrobe
-                </button>
+                <form action="{% url 'roll_wardrobe' %}" method="post" class="flex-1 md:flex-initial">
+                    {% csrf_token %}
+                    <button type="submit" class="w-full bg-black text-white px-5 py-2.5 rounded-xl text-xs font-semibold hover:bg-gray-900 transition shadow-xs cursor-pointer">
+                        🎲 Roll Weekly Wardrobe
+                    </button>
+                </form>
             </div>
         </div>
 

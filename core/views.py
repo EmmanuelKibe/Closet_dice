@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 from django.conf import settings
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -7,6 +8,7 @@ from .forms import ClothingItemForm
 from .weather_service import fetch_weekly_forecast, determine_weather_suitability
 from .models import UserProfile, ClothingItem, WeeklySchedule
 from datetime import date, timedelta
+from .generator import generate_weekly_wardrobe
 
 @login_required
 def dashboard(request):
@@ -91,4 +93,19 @@ def upload_clothing(request):
     }
     return render(request, 'core/upload_clothing.html', context)
     
+@login_required
+@require_POST
+def roll_wardrobe(request):
+    """
+    POST handler that triggers the randomizer engine for the active week's schedule.
+    """
+    today = date.today()
+    monday_start = today - timedelta(days=today.weekday())
     
+    # Locate the active schedule row for this user
+    schedule = WeeklySchedule.objects.filter(user=request.user, week_start_date=monday_start).first()
+    
+    if schedule:
+        generate_weekly_wardrobe(request.user, schedule)
+        
+    return redirect('dashboard')    
