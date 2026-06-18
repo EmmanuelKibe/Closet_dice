@@ -99,8 +99,13 @@
                     </div>
                 </div>
                 <div class="mt-6 pt-3 border-t border-gray-50 flex items-center justify-between text-xs">
-                    <span class="text-gray-400">Confirmed:</span>
-                    <span class="font-semibold text-gray-500">{% if schedule.monday_confirmed %}✅{% else %}❌{% endif %}</span>
+                    <span class="text-gray-400 font-medium">Outfit Lock:</span>
+                    <form action="{% url 'toggle_day_confirmation' 'monday' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="cursor-pointer px-2.5 py-1 rounded-md font-bold transition text-[11px] {% if schedule.monday_confirmed %}bg-emerald-50 text-emerald-700 border border-emerald-200{% else %}bg-gray-100 text-gray-500 border border-gray-200 hover:bg-gray-200{% endif %}">
+                            {% if schedule.monday_confirmed %}🔒 Locked{% else %}🔓 Unlock{% endif %}
+                        </button>
+                    </form>
                 </div>
             </div>
 
@@ -154,8 +159,13 @@
                     </div>
                 </div>
                 <div class="mt-6 pt-3 border-t border-gray-50 flex items-center justify-between text-xs">
-                    <span class="text-gray-400">Confirmed:</span>
-                    <span class="font-semibold text-gray-500">{% if schedule.tuesday_confirmed %}✅{% else %}❌{% endif %}</span>
+                    <span class="text-gray-400 font-medium">Outfit Lock:</span>
+                    <form action="{% url 'toggle_day_confirmation' 'tuesday' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="cursor-pointer px-2.5 py-1 rounded-md font-bold transition text-[11px] {% if schedule.tuesday_confirmed %}bg-emerald-50 text-emerald-700 border border-emerald-200{% else %}bg-gray-100 text-gray-500 border border-gray-200 hover:bg-gray-200{% endif %}">
+                            {% if schedule.tuesday_confirmed %}🔒 Locked{% else %}🔓 Unlock{% endif %}
+                        </button>
+                    </form>
                 </div>
             </div>
 
@@ -209,8 +219,13 @@
                     </div>
                 </div>
                 <div class="mt-6 pt-3 border-t border-gray-50 flex items-center justify-between text-xs">
-                    <span class="text-gray-400">Confirmed:</span>
-                    <span class="font-semibold text-gray-500">{% if schedule.wednesday_confirmed %}✅{% else %}❌{% endif %}</span>
+                    <span class="text-gray-400 font-medium">Outfit Lock:</span>
+                    <form action="{% url 'toggle_day_confirmation' 'wednesday' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="cursor-pointer px-2.5 py-1 rounded-md font-bold transition text-[11px] {% if schedule.wednesday_confirmed %}bg-emerald-50 text-emerald-700 border border-emerald-200{% else %}bg-gray-100 text-gray-500 border border-gray-200 hover:bg-gray-200{% endif %}">
+                            {% if schedule.wednesday_confirmed %}🔒 Locked{% else %}🔓 Unlock{% endif %}
+                        </button>
+                    </form>
                 </div>
             </div>
 
@@ -264,8 +279,13 @@
                     </div>
                 </div>
                 <div class="mt-6 pt-3 border-t border-gray-50 flex items-center justify-between text-xs">
-                    <span class="text-gray-400">Confirmed:</span>
-                    <span class="font-semibold text-gray-500">{% if schedule.thursday_confirmed %}✅{% else %}❌{% endif %}</span>
+                    <span class="text-gray-400 font-medium">Outfit Lock:</span>
+                    <form action="{% url 'toggle_day_confirmation' 'thursday' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="cursor-pointer px-2.5 py-1 rounded-md font-bold transition text-[11px] {% if schedule.thursday_confirmed %}bg-emerald-50 text-emerald-700 border border-emerald-200{% else %}bg-gray-100 text-gray-500 border border-gray-200 hover:bg-gray-200{% endif %}">
+                            {% if schedule.thursday_confirmed %}🔒 Locked{% else %}🔓 Unlock{% endif %}
+                        </button>
+                    </form>
                 </div>
             </div>
 
@@ -319,8 +339,13 @@
                     </div>
                 </div>
                 <div class="mt-6 pt-3 border-t border-gray-50 flex items-center justify-between text-xs">
-                    <span class="text-gray-400">Confirmed:</span>
-                    <span class="font-semibold text-gray-500">{% if schedule.friday_confirmed %}✅{% else %}❌{% endif %}</span>
+                    <span class="text-gray-400 font-medium">Outfit Lock:</span>
+                    <form action="{% url 'toggle_day_confirmation' 'friday' %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="cursor-pointer px-2.5 py-1 rounded-md font-bold transition text-[11px] {% if schedule.friday_confirmed %}bg-emerald-50 text-emerald-700 border border-emerald-200{% else %}bg-gray-100 text-gray-500 border border-gray-200 hover:bg-gray-200{% endif %}">
+                            {% if schedule.friday_confirmed %}🔒 Locked{% else %}🔓 Unlock{% endif %}
+                        </button>
+                    </form>
                 </div>
             </div>
 

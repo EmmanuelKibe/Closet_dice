@@ -27,13 +27,17 @@ def get_random_item_for_slot(user, category, weather_suitability):
 def generate_weekly_wardrobe(user, schedule):
     """
     Loops through Monday-Friday, evaluates the forecast for each day,
-    and assigns random matching clothing items to every open slot.
+    and assigns random matching clothing items IF only the day isn't locked.
     """
     days = ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']
     categories = ['TOP', 'BOTTOM', 'SHOES', 'OUTERWEAR']
 
     # Iterate through each calendar day
     for day in days:
+        # Check if the user has locked this specific day
+        is_locked = getattr(schedule, f"{day}_confirmed")
+        if is_locked:
+            continue
         # Fetch the day's pre-calculated weather string (e.g., 'ALL', 'COLD')
         day_weather = getattr(schedule, f"{day}_weather")
         

@@ -109,3 +109,23 @@ def roll_wardrobe(request):
         generate_weekly_wardrobe(request.user, schedule)
         
     return redirect('dashboard')    
+
+@login_required
+@require_POST
+def toggle_day_confirmation(request, day_name):
+    """
+    POST handler that toggles the confirmation/lock status for a specific day.
+    """
+    today = date.today()
+    monday_start = today - timedelta(days=today.weekday())
+    
+    schedule = WeeklySchedule.objects.filter(user=request.user, week_start_date=monday_start).first()
+    
+    if schedule and day_name in ['monday', 'tuesday', 'wednesday', 'thursday', 'friday']:
+        field_name = f"{day_name}_confirmed"
+        # Flip the boolean switch dynamically
+        current_status = getattr(schedule, field_name)
+        setattr(schedule, field_name, not current_status)
+        schedule.save()
+        
+    return redirect('dashboard')
